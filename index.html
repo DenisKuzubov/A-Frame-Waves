@@ -5,43 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trip Planner</title>
     <style>
+        #trip-planner {
+            display: flex;
+            justify-content: space-between;
+            max-width: 800px;
+            margin: auto;
+        }
+        .column {
+            width: 48%;
+        }
         .form-group {
             margin-bottom: 15px;
+        }
+        .buttons {
+            display: flex;
+            gap: 10px;
         }
     </style>
 </head>
 <body>
 <div id="trip-planner">
-    <div class="form-group">
-        <label for="trip-dates">Select Trip Date:</label>
-        <select id="trip-dates">
-            <option value="" selected disabled>Select a date</option>
-            <option value="2024-07-01">July 1, 2024</option>
-            <option value="2024-07-15">July 15, 2024</option>
-            <option value="2024-08-01">August 1, 2024</option>
-        </select>
+    <div class="column">
+        <div class="form-group">
+            <label for="trip-dates">Select Trip Date:</label>
+            <select id="trip-dates">
+                <option value="" selected disabled>Select a date</option>
+                <option value="2024-07-01">July 1, 2024</option>
+                <option value="2024-07-15">July 15, 2024</option>
+                <option value="2024-08-01">August 1, 2024</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="trip-duration">Select Duration:</label>
+            <select id="trip-duration">
+                <option value="" selected disabled>Select duration</option>
+                <option value="3">3 days</option>
+                <option value="5">5 days</option>
+                <option value="7">7 days</option>
+            </select>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="trip-duration">Select Duration:</label>
-        <select id="trip-duration">
-            <option value="" selected disabled>Select duration</option>
-            <option value="3">3 days</option>
-            <option value="5">5 days</option>
-            <option value="7">7 days</option>
-        </select>
+    <div class="column">
+        <div class="form-group">
+            <label>Trip Price:</label>
+            <span id="trip-price"></span>
+        </div>
+        <div class="form-group">
+            <label for="contact-info">Contact Information:</label>
+            <input type="text" id="contact-info">
+        </div>
+        <div class="form-group buttons">
+            <button id="submit-btn">Submit</button>
+            <button id="email-btn">Email</button>
+            <button id="phone-btn">Phone</button>
+            <button id="whatsapp-btn">WhatsApp</button>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="trip-price">Trip Price:</label>
-        <input type="text" id="trip-price" readonly>
-    </div>
-    <div class="form-group">
-        <label for="contact-info">Contact Information:</label>
-        <input type="text" id="contact-info">
-    </div>
-    <button id="submit-btn">Submit</button>
-    <button id="email-btn">Email</button>
-    <button id="phone-btn">Phone</button>
-    <button id="whatsapp-btn">WhatsApp</button>
 </div>
 
 <script>
@@ -60,9 +79,9 @@
     tripDuration.addEventListener('change', (event) => {
       const duration = event.target.value;
       if (duration && prices[duration]) {
-        tripPrice.value = `$${prices[duration]}`;
+        tripPrice.textContent = `$${prices[duration]}`;
       } else {
-        tripPrice.value = '';
+        tripPrice.textContent = '';
       }
     });
 
