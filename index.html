@@ -69,6 +69,7 @@
     const tripDuration = document.getElementById('trip-duration');
     const tripPrice = document.getElementById('trip-price');
     const submitBtn = document.getElementById('submit-btn');
+    const contactInfo = document.getElementById('contact-info');
 
     const prices = {
       "3": 300,
@@ -88,7 +89,7 @@
     submitBtn.addEventListener('click', () => {
       const date = tripDates.value;
       const duration = tripDuration.value;
-      const contact = document.getElementById('contact-info').value;
+      const contact = contactInfo.value;
 
       if (!date || !duration || !contact) {
         alert('Please fill in all fields.');
@@ -97,6 +98,14 @@
 
       // Add logic to send data to your backend or an email
       alert(`Date: ${date}, Duration: ${duration} days, Contact: ${contact}`);
+    });
+
+    const otherButtons = document.querySelectorAll('#email-btn, #phone-btn, #whatsapp-btn');
+    otherButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Logic for other buttons
+        alert('This is a non-submit button. No need to validate contact information.');
+      });
     });
   });
 </script>
