@@ -70,6 +70,8 @@
     const tripPrice = document.getElementById('trip-price');
     const submitBtn = document.getElementById('submit-btn');
     const contactInfo = document.getElementById('contact-info');
+    const emailBtn = document.getElementById('email-btn');
+    const whatsappBtn = document.getElementById('whatsapp-btn');
 
     const prices = {
       "3": 300,
@@ -96,14 +98,24 @@
         return;
       }
 
-      // Add logic to send data to your backend or an email
-      alert(`Date: ${date}, Duration: ${duration} days, Contact: ${contact}`);
+      // Логика отправки данных на email
+      const email = "kuzubov22@gmail.com";
+      const subject = "Trip Booking Request";
+      const body = `Date: ${date}, Duration: ${duration} days, Contact: ${contact}`;
+      window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     });
 
-    const otherButtons = document.querySelectorAll('#email-btn, #phone-btn, #whatsapp-btn');
+    whatsappBtn.addEventListener('click', () => {
+      const date = tripDates.value;
+      const duration = tripDuration.value;
+      const message = `Хочу поехать в сёрф трип\nДаты Трипа: ${date}\nПродолжительность трипа: ${duration} дней`;
+      window.open(`https://api.whatsapp.com/send?phone=+6282147686527&text=${encodeURIComponent(message)}`, '_blank');
+    });
+
+    const otherButtons = document.querySelectorAll('#email-btn, #phone-btn');
     otherButtons.forEach(button => {
       button.addEventListener('click', () => {
-        // Logic for other buttons
+        // Логика для других кнопок
         alert('This is a non-submit button. No need to validate contact information.');
       });
     });
