@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Planner</title>
+    <style>
+        .form-group {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+<div id="trip-planner">
+    <div class="form-group">
+        <label for="trip-dates">Select Trip Date:</label>
+        <select id="trip-dates">
+            <option value="" selected disabled>Select a date</option>
+            <option value="2024-07-01">July 1, 2024</option>
+            <option value="2024-07-15">July 15, 2024</option>
+            <option value="2024-08-01">August 1, 2024</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="trip-duration">Select Duration:</label>
+        <select id="trip-duration">
+            <option value="" selected disabled>Select duration</option>
+            <option value="3">3 days</option>
+            <option value="5">5 days</option>
+            <option value="7">7 days</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="trip-price">Trip Price:</label>
+        <input type="text" id="trip-price" readonly>
+    </div>
+    <div class="form-group">
+        <label for="contact-info">Contact Information:</label>
+        <input type="text" id="contact-info">
+    </div>
+    <button id="submit-btn">Submit</button>
+    <button id="email-btn">Email</button>
+    <button id="phone-btn">Phone</button>
+    <button id="whatsapp-btn">WhatsApp</button>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const tripDates = document.getElementById('trip-dates');
+    const tripDuration = document.getElementById('trip-duration');
+    const tripPrice = document.getElementById('trip-price');
+    const submitBtn = document.getElementById('submit-btn');
+
+    const prices = {
+      "3": 300,
+      "5": 500,
+      "7": 700
+    };
+
+    tripDuration.addEventListener('change', (event) => {
+      const duration = event.target.value;
+      if (duration && prices[duration]) {
+        tripPrice.value = `$${prices[duration]}`;
+      } else {
+        tripPrice.value = '';
+      }
+    });
+
+    submitBtn.addEventListener('click', () => {
+      const date = tripDates.value;
+      const duration = tripDuration.value;
+      const contact = document.getElementById('contact-info').value;
+
+      if (!date || !duration || !contact) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      // Add logic to send data to your backend or an email
+      alert(`Date: ${date}, Duration: ${duration} days, Contact: ${contact}`);
+    });
+  });
+</script>
+</body>
+</html>
